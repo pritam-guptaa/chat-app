@@ -1,10 +1,12 @@
-import Button from '@/components/ui/Button'
-import { FC } from 'react'
-interface pageProps {
-  
-}
+'use client'
 
-const page: FC<pageProps> = ({}) => {
+import Button from '@/components/ui/Button'
+import {authOptions} from '@/lib/auth'
+import {getServerSession} from 'next-auth'
+
+const page = async({}) => {
+
+  const session = await getServerSession(authOptions)
   return <Button> hell</Button>
 }
 
