@@ -19,7 +19,7 @@ async function getChatMessages(chatId: string) {
   try {
     const result: string[] = await fetchRedis(
       "zrange",
-      `chat:${chatId}`,
+      `chat:${chatId}:messages`,
       0,
       -1
     );
@@ -82,8 +82,8 @@ const page = async ({ params }: PageProps) => {
         </div>
       </div>
 
-      <Messages initialMessages={initialMessage} sessionId={session.user.id}/>
-      <ChatInput chatPartner={chatPartner}/>
+      <Messages chatPartner={chatPartner} sessionImg={session.user.image} initialMessages={initialMessage} sessionId={session.user.id}/>
+      <ChatInput chatId={chatId} chatPartner={chatPartner}/>
     </div>
   );
 };
