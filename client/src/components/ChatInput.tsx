@@ -24,7 +24,7 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
       setInput("");
       textareaRef.current?.focus();
     } catch (error) {
-      toast.error("Something wnt wrong. Please try again later.");
+      toast.error("Something went wrong. Please try again later.");
     } finally {
       setIsLoading(false);
     }
