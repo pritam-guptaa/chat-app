@@ -36,7 +36,7 @@ export async function POST(req: Request){
 
         const messageData: Message = {
             id: nanoid(),
-            sendeId: session.user.id,
+            senderId: session.user.id,
             text,
             timestamp
         }
@@ -45,6 +45,12 @@ export async function POST(req: Request){
 
         //notify all connected chat room client
         pusherServer.trigger(toPusherKey(`chat:${chatId}`), 'incoming_message', message)
+
+        pusherServer.trigger(toPusherKey(`user:${friendId}:chats`), 'new_message', {
+            ...message,
+            senderImg: sender.image,
+            senderName: sender.name
+        })
 
         // all valid send message
         await db.zadd(`chat:${chatId}:messages`,{

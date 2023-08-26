@@ -23,18 +23,17 @@ const Messages: FC<MessagesProps> = ({
   chatId
 }) => {
   const scrollDownRef = useRef<HTMLDivElement | null>(null);
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const [messages, setMessages] = useState<Message[]>(initialMessages.reverse());
 
   const formatTimestamp = (timestamp: number) => {
     return format(timestamp, "HH:mm");
   };
 
-
   useEffect(()=>{
     pusherClient.subscribe(toPusherKey(`chat:${chatId}`))
 
     const messageHandler = (message: Message)=>{
-      setMessages((prev)=> [...prev, message])
+      setMessages((prev)=> prev.concat(message))
     }
 
     pusherClient.bind('incoming_message', messageHandler)
@@ -42,7 +41,7 @@ const Messages: FC<MessagesProps> = ({
     return ()=>{
       pusherClient.unsubscribe(toPusherKey(`chat:${chatId}`))
   
-      pusherClient.unbind('imcoming_message', messageHandler)
+      pusherClient.unbind('incoming_message', messageHandler)
   
     }
 },[chatId])
@@ -50,14 +49,14 @@ const Messages: FC<MessagesProps> = ({
   return (
     <div
       id="messages"
-      className="flex h-full flex-1 flex-col-reverse gap-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
+      className="flex h-full flex-1 flex-col gap-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
     >
       <div ref={scrollDownRef}>
         {messages.map((message, index) => {
-          const isCurrentUser = message.sendeId === sessionId;
+          const isCurrentUser = message.senderId === sessionId;
 
           const hasNextMessageFromSameUser =
-            messages[index - 1]?.sendeId === messages[index].sendeId;
+            messages[index - 1]?.senderId === messages[index].senderId;
 
           return (
             <div
@@ -79,7 +78,7 @@ const Messages: FC<MessagesProps> = ({
                   )}
                 >
                   <span
-                    className={cn("px-4 my-2 py-2 rounded-lg inline-block", {
+                    className={cn("px-4 my-2 py-2 break-words rounded-lg inline-block", {
                       "bg-indigo-600 text-white": isCurrentUser,
                       "bg-gray-200 text-gray-900": !isCurrentUser,
                       "rounded-br-none":
