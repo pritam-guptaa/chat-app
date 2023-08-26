@@ -4,7 +4,8 @@ import Providers from "@/components/Providers";
 
 export const metadata: Metadata = {
   title: "Chat App",
-  description: "A simple chat app built using NextJS Typescript and Upstash Redis database.",
+  description:
+    "A simple chat app built using NextJS Typescript and Upstash Redis database.",
 };
 
 export default function RootLayout({
@@ -14,6 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
+
       <body>
         <Providers>{children}</Providers>
       </body>
