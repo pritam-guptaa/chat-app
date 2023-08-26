@@ -28,6 +28,7 @@ const Page: FC<pageProps> = ({}) => {
         <div className="w-full flex flex-col items-center max-w-md space-y-8 ">
           <div className="flex flex-col items-center gap-8">
             {/* Illustration start */}
+            <div id='welcome-illustration' className="h-72 w-72">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
               <g id="freepik--Floor--inject-54">
                 <path
@@ -714,6 +715,7 @@ const Page: FC<pageProps> = ({}) => {
                 ></path>
               </g>
             </svg>
+            </div>
             {/* Illustration end */}
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
               Sign in to your account
