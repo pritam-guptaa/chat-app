@@ -4,8 +4,7 @@ const nextConfig = {
     domains: [
         'lh3.googleusercontent.com'
     ]
-   },
-   distDir: "build"
+   }
 }
 
 module.exports = nextConfig
