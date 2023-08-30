@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "engines": {
-    "node": ">=v16.16.0"
+    "node": ">=v18.17.0"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
