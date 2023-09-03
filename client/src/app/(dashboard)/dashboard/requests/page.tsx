@@ -20,7 +20,7 @@ const Page = async({}) => {
 
             return {
                 senderId,
-                senderEmail: sender.email,
+                senderEmail: sender?.email,
             }
         })
     )

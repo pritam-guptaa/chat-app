@@ -23,7 +23,7 @@ const Messages: FC<MessagesProps> = ({
   chatId
 }) => {
   const scrollDownRef = useRef<HTMLDivElement | null>(null);
-  const [messages, setMessages] = useState<Message[]>(initialMessages.reverse());
+  const [messages, setMessages] = useState<Message[]>(initialMessages);
 
   const formatTimestamp = (timestamp: number) => {
     return format(timestamp, "HH:mm");
